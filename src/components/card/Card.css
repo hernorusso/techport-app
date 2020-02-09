@@ -3,5 +3,67 @@
     border-radius: 5px;
     max-height: 350px;
     background-color: #FFE0B2;
-    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    --grey:  #37474f;
+    --fwLight: 200;
+}
+
+.Card__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Card__header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.Card__header-left p {
+    margin: 0;
+    font-size: .85em;
+    font-weight: var(--fwLight);
+}
+
+.Card__header-left h3 {
+    margin: 5px 0px;
+}
+
+.Card__header-right {
+    padding-left: 20px;
+}
+
+.Card__status {
+    border: 2px solid var(--grey);
+    padding: 5px;
+}
+
+.Card__status p {
+    margin: 0;
+    font-weight: var(--fwLight);
+}
+
+.Card__description {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-top: 1vh;
+}
+
+.Card__description p {
+    margin: 0;
+}
+
+.Card__button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1vh;
+}
+.Card__button p {
+    margin: 0;
+    padding: 0 3px;
+    font-weight: var(--fwLight);
 }

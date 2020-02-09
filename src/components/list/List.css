@@ -1,5 +1,35 @@
+.List h2 {
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 1vh 0 2vh 0;
+}
 .List > ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.List > ul > li {
+    margin-top: 5px;
+}
+
+.List > ul > li:first-child {
+    margin-top: 0;
+}
+
+@media (min-width: 600px) {
+    .List > ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 5px;
+    }
+    .List > ul > li {
+        margin-top: 0;
+    }
 }

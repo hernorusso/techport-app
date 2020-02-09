@@ -5,21 +5,27 @@ import './Card.css';
 const Card = ({ title, description, lastUpdated, startDate, status }) => {
     return (
         <div className="Card">
-            <div className="Card__left-header">
-                <div className="Card__title">{title}</div>
-                <div className="Card__meta-data">
-                    <div>Start Date: {startDate}</div>
-                    <div>Last Updated: {lastUpdated}</div>
+            <div className="Card__header">
+                <div className="Card__header-left">
+                    <h3>{title}</h3>
+                    <p>Start Date: {startDate}</p>
+                    <p>Last Updated: {lastUpdated}</p>
                 </div>
-            </div>
-            <div className="Card__right-header">
-                <div className="Card__status">{status}</div>
+                <div className="Card__header-right">
+                    <div className="Card__status">
+                        <p>{status}</p>
+                    </div>
+                </div>
             </div>
             <div className="Card__description">
                 <p>
                     {description}
                 </p>
             </div>
+            <button className="Card__button">
+                <p>More Icon</p>
+                <p>More</p>
+            </button>
         </div>
     );
 };

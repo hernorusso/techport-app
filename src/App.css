@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -47,6 +48,7 @@
 .App-main-content {
   background: #455A64;
   overflow: hidden;
+  padding: 10px;
 }
 
 .App-link {
