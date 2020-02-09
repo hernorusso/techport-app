@@ -1,0 +1,7 @@
+.Card {
+    border: 1px solid #78909c;
+    border-radius: 5px;
+    max-height: 350px;
+    background-color: #FFE0B2;
+    position: relative;
+}

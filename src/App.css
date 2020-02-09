@@ -44,6 +44,11 @@
   padding: 5px 10px;
 }
 
+.App-main-content {
+  background: #455A64;
+  overflow: hidden;
+}
+
 .App-link {
   color: #61dafb;
 }
