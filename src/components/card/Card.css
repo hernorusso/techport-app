@@ -1,35 +1,34 @@
 .Card {
     border: 1px solid #78909c;
     border-radius: 5px;
-    max-height: 350px;
+    height: 350px;
     background-color: #FFE0B2;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
     --grey:  #37474f;
     --fwLight: 200;
+    --lh: 1.2em;
 }
 
 .Card__header {
     display: flex;
+    flex-direction: column;
+    min-height: 9vh;
+}
+
+.Card__header-top {
+    display: flex;
     justify-content: space-between;
 }
 
-.Card__header-left {
-    display: flex;
-    flex-direction: column;
-}
-
-.Card__header-left p {
-    margin: 0;
-    font-size: .85em;
-    font-weight: var(--fwLight);
-}
-
-.Card__header-left h3 {
+.Card__header-top h3 {
     margin: 5px 0px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .Card__header-right {
@@ -46,11 +45,26 @@
     font-weight: var(--fwLight);
 }
 
-.Card__description {
+.Card__meta-data p {
+    margin: 0;
+    font-size: .85em;
+    font-weight: var(--fwLight);
+}
+
+.Card__content {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+}
+
+.Card__description {
     overflow: hidden;
-    padding-top: 1vh;
+    padding-top: 3vh;
+    display: -webkit-box;
+    -webkit-line-clamp: 11;
+    -webkit-box-orient: vertical;
+    line-height: var(--lh);
+    min-height: calc(10.8 * var(--lh));
 }
 
 .Card__description p {
@@ -60,7 +74,6 @@
 .Card__button {
     display: flex;
     justify-content: center;
-    margin-top: 1vh;
 }
 .Card__button p {
     margin: 0;
