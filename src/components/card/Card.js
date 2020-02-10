@@ -11,15 +11,22 @@ const Card = ({
     status,
     onButtonExpandClick,
     cardId,
-    isExpanded
+    isExpanded,
+    onCardClick,
+    isSelected
 }) => {
 
     const onExpandClick = () => {
         onButtonExpandClick(cardId);
     };
 
+    const onCardBodyClick = () => {
+        onCardClick(cardId);
+    };
+
     const cardClass = classNames('Card', {
-        'Card--expanded': isExpanded
+        'Card--expanded': isExpanded,
+        'Card--isSelected': isSelected
     });
 
     const cardDescriptionClass = classNames('Card__description', {
@@ -27,7 +34,7 @@ const Card = ({
     });
 
     return (
-        <div className={cardClass}>
+        <div className={cardClass} onClick={onCardBodyClick}>
             <div className="Card__header">
                 <div className="Card__header-top">
                     <h3>{title}</h3>
@@ -68,7 +75,9 @@ Card.propTypes = {
     status: PropTypes.string,
     onButtonClick: PropTypes.func,
     cardId: PropTypes.number,
-    isExpanded: PropTypes.bool
+    isExpanded: PropTypes.bool,
+    onCardClick: PropTypes.func,
+    isSelected: PropTypes.bool
 };
 
 export default Card;

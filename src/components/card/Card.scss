@@ -1,8 +1,13 @@
+$card-color-light-orange: #FFE0B2;
+$card-color-orange: #ffcc80;
+$card-color-super-light-orange:#fee8c6;
+
+
 .Card {
     border: 1px solid #78909c;
     border-radius: 5px;
     height: 350px;
-    background-color: #FFE0B2;
+    background-color: $card-color-light-orange;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,6 +18,18 @@
 
     &--expanded {
         height: auto;
+    }
+
+    &--isSelected {
+        background-color: $card-color-orange;
+
+       &:hover {
+            background-color: $card-color-orange!important;
+        }
+    }
+
+    &:hover {
+        background-color: $card-color-super-light-orange;
     }
 }
 

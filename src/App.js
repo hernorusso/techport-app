@@ -16,18 +16,27 @@ const error = null;
 function App() {
 
   const LIST_TITLE = 'Projects';
-  const LOADING_MESSAGE = 'LOADING...'
+  const LOADING_MESSAGE = 'LOADING...';
+
+  /** Keep cards page state */
   const [ slotPage, setSlotPage ] = useState(1);
+
+  /** Keep expanded cards state */
   const [expandedCards, setExpandedCards] = useState([]);
+
+  /** Keep Selected cards State */
+  const [selectedCards, setSelectedCards] = useState([]);
 
   /** projectList holds the projects to be render in the UI */
   // const {projectsData, isFetching, error} = useGetProjects(slotPage);
 
-  const onButtonClick = (e) => {
+  /** Handle Button List clicks */
+  const onButtonListClick = (e) => {
     e.preventDefault();
     setSlotPage(slotPage + 1);
   }
 
+  /** Handles button expand Click */
   const onCardExpandClick = (id) => {
     let nextExpandedCards;
     if (expandedCards.indexOf(id) === -1) {
@@ -38,6 +47,18 @@ function App() {
       setExpandedCards(nextExpandedCards);
     }
   }
+
+  /** Handles card selection */
+  const onCardClick = (id) => {
+    let nextSelectedCards;
+    if (selectedCards.indexOf(id) === -1) {
+      nextSelectedCards = [...selectedCards, id];
+      setSelectedCards(nextSelectedCards);
+    } else {
+      nextSelectedCards = selectedCards.filter((cardId) => cardId !== id);
+      setSelectedCards(nextSelectedCards);
+    }
+  };
 
   return (
     <div className="App">
@@ -61,6 +82,7 @@ function App() {
                   status
                 }) => {
                   const isExpanded = expandedCards.indexOf(id) >= 0 ? true : false;
+                  const isSelected = selectedCards.indexOf(id) >= 0 ? true : false;
                   return (
                     <li key={id}>
                       <Card
@@ -72,13 +94,15 @@ function App() {
                         onButtonExpandClick={onCardExpandClick}
                         cardId={id}
                         isExpanded={isExpanded}
+                        onCardClick={onCardClick}
+                        isSelected={isSelected}
                       />
                     </li>
                   )})}
               </List>
               <Button
                 label="See More"
-                onClick={onButtonClick}
+                onClick={onButtonListClick}
               />
             </>
         }
