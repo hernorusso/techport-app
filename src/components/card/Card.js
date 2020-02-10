@@ -13,7 +13,8 @@ const Card = ({
     cardId,
     isExpanded,
     onCardClick,
-    isSelected
+    isSelected,
+    onCardDelete
 }) => {
 
     const onExpandClick = (e) => {
@@ -24,6 +25,11 @@ const Card = ({
     const onCardBodyClick = () => {
         onCardClick(cardId);
     };
+
+    const onDeleteClick = (e) => {
+        e.stopPropagation();
+        onCardDelete(cardId);
+    }
 
     const cardClass = classNames('Card', {
         'Card--expanded': isExpanded,
@@ -49,6 +55,15 @@ const Card = ({
                     <p>Start Date: {startDate}</p>
                     <p>Last Updated: {lastUpdated}</p>
                 </div>
+                {isSelected
+                    ? <button
+                        className="Card__btn-delete"
+                        onClick={onDeleteClick}
+                    >
+                        Del
+                    </button>
+                    : null
+                }
             </div>
             <div className="Card__content">
                 <div className={cardDescriptionClass}>
@@ -78,7 +93,8 @@ Card.propTypes = {
     cardId: PropTypes.number,
     isExpanded: PropTypes.bool,
     onCardClick: PropTypes.func,
-    isSelected: PropTypes.bool
+    isSelected: PropTypes.bool,
+    onCardDelete: PropTypes.func
 };
 
 export default Card;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import List from './components/list/List';
@@ -27,8 +27,16 @@ function App() {
   /** Keep Selected cards State */
   const [selectedCards, setSelectedCards] = useState([]);
 
+  /** Keep the current showed cards */
+  const [shownProjects, setShownProjects] = useState([]);
+
   /** projectList holds the projects to be render in the UI */
   // const {projectsData, isFetching, error} = useGetProjects(slotPage);
+
+  useEffect(() => {
+    console.log('run sync hook');
+    setShownProjects([...shownProjects, ...projectsData]);
+  }, [slotPage]);
 
   /** Handle Button List clicks */
   const onButtonListClick = (e) => {
@@ -60,6 +68,12 @@ function App() {
     }
   };
 
+  /** Handles the card remotion */
+  const onCardDelete = (id) => {
+    const nextShownProjects = shownProjects.filter((project) => project.id !== id);
+    setShownProjects(nextShownProjects);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -73,7 +87,7 @@ function App() {
           ? <UserMessage message={isFetching ? LOADING_MESSAGE : `Error: ${error.message}. Please reload the page to try again`}/>
           : <>
               <List title={LIST_TITLE}>
-                {projectsData.map(({
+                {shownProjects.map(({
                   id,
                   title,
                   description,
@@ -96,6 +110,7 @@ function App() {
                         isExpanded={isExpanded}
                         onCardClick={onCardClick}
                         isSelected={isSelected}
+                        onCardDelete={onCardDelete}
                       />
                     </li>
                   )})}

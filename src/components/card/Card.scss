@@ -43,6 +43,11 @@ $card-status-color: #b1c9d5;
             font-weight: var(--fwLight);
         }
     }
+
+    &__btn-delete {
+        align-self: flex-start;
+        z-index: 2;
+    }
 }
 
 .Card__header {

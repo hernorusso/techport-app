@@ -1,7 +1,7 @@
 .App {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   min-height: 100vh;
   overflow: hidden;
@@ -49,6 +49,11 @@
   background: #455A64;
   overflow: hidden;
   padding: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .App-link {
