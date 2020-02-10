@@ -4,48 +4,60 @@ import './App.css';
 import List from './components/list/List';
 import Card from './components/card/Card';
 import UserMessage from './components/userMessage/UserMessage';
+import Button from './components/button/Button';
 import useGetProjects from './hooks/useGetProjects';
 
 function App() {
 
   const LIST_TITLE = 'Projects';
   const LOADING_MESSAGE = 'LOADING...'
-  const PROJECT_SLOT_SIZE = 5;
+  const [ slotPage, setSlotPage ] = useState(1);
 
   /** projectList holds the projects to be render in the UI */
-  const {projectsData, isFetching, error} = useGetProjects(PROJECT_SLOT_SIZE);
+  const {projectsData, isFetching, error} = useGetProjects(slotPage);
+
+  const onButtonClick = (e) => {
+    e.preventDefault();
+    setSlotPage(slotPage + 1);
+  }
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>
-          <code>TechPort Nasa Projects</code>
+          <code>Nasa TechPort</code>
         </h1>
       </header>
       <main className="App-main-content">
         {isFetching || error
-          ?  <UserMessage message={isFetching ? LOADING_MESSAGE : `Error: ${error.message}`}/>
-          :  <List title={LIST_TITLE}>
-              {projectsData.map(({
-                id,
-                title,
-                description,
-                lastUpdated,
-                startDate,
-                status
-              }) => (
-                  <li key={id}>
-                    <Card
-                      title={title}
-                      description={description}
-                      lastUpdated={lastUpdated}
-                      startDate={startDate}
-                      status={status}
-                    />
-                  </li>
-                ))}
-            </List>
+          ? <UserMessage message={isFetching ? LOADING_MESSAGE : `Error: ${error.message}. Please reload the page to try again`}/>
+          : <>
+              <List title={LIST_TITLE}>
+                {projectsData.map(({
+                  id,
+                  title,
+                  description,
+                  lastUpdated,
+                  startDate,
+                  status
+                }) => (
+                    <li key={id}>
+                      <Card
+                        title={title}
+                        description={description}
+                        lastUpdated={lastUpdated}
+                        startDate={startDate}
+                        status={status}
+                      />
+                    </li>
+                  ))}
+              </List>
+              <Button
+                label="See More"
+                onClick={onButtonClick}
+              />
+            </>
         }
       </main>
       <footer className="App-footer">

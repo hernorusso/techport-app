@@ -1,0 +1,9 @@
+.Button {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.Button button {
+    border-radius: 5px;
+}

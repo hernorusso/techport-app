@@ -8,7 +8,7 @@ import axios from 'axios';
 const API_KEY = process.env.REACT_APP_API_KEY || 'DEMO_KEY';
 const API_PROJECTS_TEMPLATE = 'https://api.nasa.gov/techport/api/projects'
 const API_PROJECTS_URL = `${API_PROJECTS_TEMPLATE}?api_key=${API_KEY}`;
-const PROJECTS_SLOT_SIZE = 5;
+const PROJECTS_SLOT_SIZE = 25;
 
 const getProjectAPI = (projectId) => `${API_PROJECTS_TEMPLATE}/${projectId}?api_key=${API_KEY}`;
 
@@ -35,15 +35,24 @@ const useGetProjects = (page) => {
         projectsData: []
     });
 
+    const pageStartAt = data.projectsData.length;
+    const pageEndsAt = PROJECTS_SLOT_SIZE * page;
+
     useEffect(() => {
         async function getProjects() {
             try {
                 setData({...data, isFetching: true});
-                const response = await axios.get(API_PROJECTS_URL);
-                const projects = extractProjects(response);
-                const projectsSlot = projects.slice(0, PROJECTS_SLOT_SIZE);
+                let projects;
+                if(data.projects.length === 0) {
+                    const response = await axios.get(API_PROJECTS_URL);
+                    projects = extractProjects(response);
+                } else {
+                    projects = data.projects;
+                }
+                const projectsSlot = projects.slice(pageStartAt, pageEndsAt);
                 const resolvedProjectsData = await Promise.all(getProjectsData(projectsSlot));
-                const projectsData = extractProjectsData(resolvedProjectsData);
+                const fetchedProjects = extractProjectsData(resolvedProjectsData);
+                const projectsData = [...data.projectsData, ...fetchedProjects];
                 setData({
                     projects,
                     projectsData,
@@ -57,7 +66,7 @@ const useGetProjects = (page) => {
         };
 
         getProjects();
-    }, []);
+    }, [page]);
 
     const {projectsData, isFetching, error} = data;
 
