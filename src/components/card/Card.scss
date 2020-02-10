@@ -1,6 +1,7 @@
 $card-color-light-orange: #FFE0B2;
 $card-color-orange: #ffcc80;
 $card-color-super-light-orange:#fee8c6;
+$card-status-color: #b1c9d5;
 
 
 .Card {
@@ -31,6 +32,17 @@ $card-color-super-light-orange:#fee8c6;
     &:hover {
         background-color: $card-color-super-light-orange;
     }
+
+    &__status {
+        border: 2px solid var(--grey);
+        padding: 5px;
+        background-color: $card-status-color;
+
+        p {
+            margin: 0;
+            font-weight: var(--fwLight);
+        }
+    }
 }
 
 .Card__header {
@@ -54,16 +66,6 @@ $card-color-super-light-orange:#fee8c6;
 
 .Card__header-right {
     padding-left: 20px;
-}
-
-.Card__status {
-    border: 2px solid var(--grey);
-    padding: 5px;
-}
-
-.Card__status p {
-    margin: 0;
-    font-weight: var(--fwLight);
 }
 
 .Card__meta-data p {
