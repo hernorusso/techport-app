@@ -1,10 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Card.css';
+import classNames from 'classnames';
+import './Card.scss';
 
-const Card = ({ title, description, lastUpdated, startDate, status }) => {
+const Card = ({
+    title,
+    description,
+    lastUpdated,
+    startDate,
+    status,
+    onButtonExpandClick,
+    cardId,
+    isExpanded
+}) => {
+
+    const onExpandClick = () => {
+        onButtonExpandClick(cardId);
+    };
+
+    const cardClass = classNames('Card', {
+        'Card--expanded': isExpanded
+    });
+
+    const cardDescriptionClass = classNames('Card__description', {
+        'Card__description--expanded': isExpanded
+    });
+
     return (
-        <div className="Card">
+        <div className={cardClass}>
             <div className="Card__header">
                 <div className="Card__header-top">
                     <h3>{title}</h3>
@@ -20,12 +43,15 @@ const Card = ({ title, description, lastUpdated, startDate, status }) => {
                 </div>
             </div>
             <div className="Card__content">
-                <div className="Card__description">
+                <div className={cardDescriptionClass}>
                     <p>
                         {description}
                     </p>
                 </div>
-                <button className="Card__button">
+                <button
+                    className="Card__button"
+                    onClick={onExpandClick}
+                >
                     <p>More Icon</p>
                     <p>More</p>
                 </button>
@@ -38,7 +64,11 @@ Card.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     lastUpdated: PropTypes.string,
-    startDate: PropTypes.string
+    startDate: PropTypes.string,
+    status: PropTypes.string,
+    onButtonClick: PropTypes.func,
+    cardId: PropTypes.number,
+    isExpanded: PropTypes.bool
 };
 
 export default Card;

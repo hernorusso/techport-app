@@ -10,6 +10,10 @@
     --grey:  #37474f;
     --fwLight: 200;
     --lh: 1.2em;
+
+    &--expanded {
+        height: auto;
+    }
 }
 
 .Card__header {
@@ -65,6 +69,10 @@
     -webkit-box-orient: vertical;
     line-height: var(--lh);
     min-height: calc(10.8 * var(--lh));
+
+    &--expanded {
+        display: flex;
+    }
 }
 
 .Card__description p {
