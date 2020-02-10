@@ -16,7 +16,8 @@ const Card = ({
     isSelected
 }) => {
 
-    const onExpandClick = () => {
+    const onExpandClick = (e) => {
+        e.stopPropagation();
         onButtonExpandClick(cardId);
     };
 
