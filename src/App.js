@@ -7,12 +7,6 @@ import UserMessage from './components/userMessage/UserMessage';
 import Button from './components/button/Button';
 import useGetProjects from './hooks/useGetProjects';
 
-//TODO: Remove it, just for testing
-import projectsData from './mockedData/projectsContentList.json'
-const isFetching = false;
-const error = null;
-// End mocked values
-
 function App() {
 
   const LIST_TITLE = 'Projects';
@@ -31,12 +25,11 @@ function App() {
   const [shownProjects, setShownProjects] = useState([]);
 
   /** projectList holds the projects to be render in the UI */
-  // const {projectsData, isFetching, error} = useGetProjects(slotPage);
+  const {projectsData, isFetching, error} = useGetProjects(slotPage);
 
   useEffect(() => {
-    console.log('run sync hook');
     setShownProjects([...shownProjects, ...projectsData]);
-  }, [slotPage]);
+  }, [projectsData]);
 
   /** Handle Button List clicks */
   const onButtonListClick = (e) => {

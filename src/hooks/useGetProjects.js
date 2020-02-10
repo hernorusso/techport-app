@@ -35,7 +35,7 @@ const useGetProjects = (page) => {
         projectsData: []
     });
 
-    const pageStartAt = data.projectsData.length;
+    const pageStartAt = PROJECTS_SLOT_SIZE * (page - 1);
     const pageEndsAt = PROJECTS_SLOT_SIZE * page;
 
     useEffect(() => {
@@ -43,20 +43,22 @@ const useGetProjects = (page) => {
             try {
                 setData({...data, isFetching: true});
                 let projects;
+
                 if(data.projects.length === 0) {
                     const response = await axios.get(API_PROJECTS_URL);
                     projects = extractProjects(response);
                 } else {
                     projects = data.projects;
                 }
+
                 const projectsSlot = projects.slice(pageStartAt, pageEndsAt);
                 const resolvedProjectsData = await Promise.all(getProjectsData(projectsSlot));
-                const fetchedProjects = extractProjectsData(resolvedProjectsData);
-                const projectsData = [...data.projectsData, ...fetchedProjects];
+                const projectsData = extractProjectsData(resolvedProjectsData);
+
                 setData({
                     projects,
-                    projectsData,
-                    isFetching: false
+                    isFetching: false,
+                    projectsData
                 });
             } catch(e) {
                 const error = e.toJSON();
