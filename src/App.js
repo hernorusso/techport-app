@@ -1,20 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import List from './components/list/List';
 import Card from './components/card/Card';
-//TODO: remove the next import, is just for mocking purposes
-import projectListData from './mockedData/projectsContentList.json';
+import UserMessage from './components/userMessage/UserMessage';
+import useGetProjects from './hooks/useGetProjects';
 
 function App() {
 
   const LIST_TITLE = 'Projects';
+  const LOADING_MESSAGE = 'LOADING...'
+  const PROJECT_SLOT_SIZE = 5;
+
   /** projectList holds the projects to be render in the UI */
-  const [projectsList, setProjectList] = useState([]);
-  /** Fetching Data */
-  useEffect(() => {
-    setProjectList(projectListData);
-  }, []);
+  const {projectsData, isFetching, error} = useGetProjects(PROJECT_SLOT_SIZE);
 
   return (
     <div className="App">
@@ -25,28 +24,29 @@ function App() {
         </h1>
       </header>
       <main className="App-main-content">
-        <List title={LIST_TITLE}>
-          {projectsList.map(({project}) => {
-            const {
-              title,
-              description,
-              lastUpdated,
-              startDate,
-              status
-            } = project;
-
-            return (
-              <li key={project.id}>
-                <Card
-                  title={title}
-                  description={description}
-                  lastUpdated={lastUpdated}
-                  startDate={startDate}
-                  status={status}
-                />
-              </li>);
-          })}
-        </List>
+        {isFetching || error
+          ?  <UserMessage message={isFetching ? LOADING_MESSAGE : `Error: ${error.message}`}/>
+          :  <List title={LIST_TITLE}>
+              {projectsData.map(({
+                id,
+                title,
+                description,
+                lastUpdated,
+                startDate,
+                status
+              }) => (
+                  <li key={id}>
+                    <Card
+                      title={title}
+                      description={description}
+                      lastUpdated={lastUpdated}
+                      startDate={startDate}
+                      status={status}
+                    />
+                  </li>
+                ))}
+            </List>
+        }
       </main>
       <footer className="App-footer">
         <code className="App-footer__item">author: @xherno</code>
