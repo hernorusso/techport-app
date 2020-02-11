@@ -1,30 +1,23 @@
 # TechPort App
 
-The main purpose of this project is to demoing an application fitting this [requirements](https://miro.com/app/board/o9J_kvEAglY=/).
-
+The main purpose of this project is to demoing an application fitting this [requirements](https://miro.com/app/board/o9J_kvEAglY=/).</br>
 To bootstrap this project just clone this repo and run `yarn`.
 
 ## How to use it
 
-Start the project locally by running `yarn start`.
-
+Start the project locally by running `yarn start`.</br>
 Go to your browser and type `http://localhost:3000/` if it didn't open automatically.
 
 ### Brief App explanation
-The App will query the NASA API, and then will show the first 25 available results.
-
-Each result is exposed in a card format.
-
-You can click on any card to select, expand or delete it.
-
-If you click the `See More` button at the bottom you can fetch another 25 results.
-
-The App is responsive, so it could be accessed with any viewport sized device (test briefly with chrome mobile emulator).
+The App will query the NASA API, and then will show the first 25 available results.</br>
+Each result is exposed in a card format.</br>
+You can click on any card to select, expand or delete it.</br>
+If you click the `See More` button at the bottom you can fetch another 25 results.</br>
+The App is responsive, so it could be accessed with any viewport sized device (test briefly with chrome mobile emulator).</br>
 
 
 ## Tech info
-By default the app runs with the demo NASA API key, which sometimes is blocked because it exceeds the requests number allowed.
-
+By default the app runs with the demo NASA API key, which sometimes is blocked because it exceeds the requests number allowed.</br>
 So the best experience you can have it is by passing your own NASA API key when starting the app. You can get your NASA API key here:
 
 * https://api.nasa.gov/
@@ -33,8 +26,7 @@ Once you have your own NASA API key, you can run the app with the following comm
 
 `REACT_APP_API_KEY=[your_API_key] yarn start`
 
-The NASA API is queried with the provided API key once to get the project list.
-
+The NASA API is queried with the provided API key once to get the project list.</br>
 Then, each page request done in the app (by clicking the `See More` button) will fire 25 requests in parallel to get projects detailed information (the first 25
 projects do not require any other action than just start the app and open the browser).
 
@@ -43,14 +35,11 @@ Since the service used to query the NASA api is built in the client App, that ke
 
 ### Improvements that could be done
 
-The queries done by the app should be handle by a `node`, `python`, `lambda` function micro-service, in order to keep the API key secured in the server side of things.
-
+The queries done by the app should be handle by a `node`, `python`, `lambda` function micro-service, in order to keep the API key secured in the server side of things.</br>
 Most css bits were written without any preprocessor, but as the project start growing `sass` was added to have a better developing experience.
-It would be nice to have all the css written in sass style/files.
-
-Unit tests are missing. I run out of time, so I prioritized to deliver the project in time, and let the test for a next iteration.
-
-A nice to have would be to incorporate some icons and animations, but the same scenario described above also applies here.
+It would be nice to have all the css written in sass style/files.</br>
+Unit tests are missing. I run out of time, so I prioritized to deliver the project in time, and let the test for a next iteration.</br>
+A nice to have would be to incorporate some icons and animations, but the same scenario described above also applies here.</br>
 
 
 ## Client Libraries / Frameworks
