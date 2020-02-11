@@ -19,6 +19,8 @@ You can click on any card to select, expand or delete it.
 
 If you click the `See More` button at the bottom you can fetch another 25 results.
 
+The App is responsive, so it could be accessed with any viewport sized device (test briefly with chrome mobile emulator).
+
 
 ## Tech info
 By default the app runs with the demo NASA API key, which sometimes is blocked because it exceeds the requests number allowed.
